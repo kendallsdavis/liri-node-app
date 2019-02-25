@@ -1,7 +1,6 @@
 const env = require("dotenv").config();
 var keys = require("./keys.js");
 const Spotify = require('node-spotify-api');
-// console.log(keys);
 var fs = require("fs");
 var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
@@ -43,7 +42,6 @@ switch(request){
     .then(function(response){
         for (let index = 0; index < response.data.length; index++) {
             const venue = response.data[index].venue.name;
-            // console.log(response.data[index].venue.name);
             const country = response.data[index].venue.country;
             const region = response.data[index].venue.region;
             const city = response.data[index].venue.city;
@@ -57,7 +55,6 @@ switch(request){
 }
 
 function spotifyThis (value){
-    console.log(value);
     spotify.search({ type: 'track', query: value, limit: 1 }, function(err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
@@ -94,7 +91,6 @@ function doWhatItSays(){
          
         } else {
            // set the value variable equal to the data read in via fs.readFile
-           console.log(data);
            request = data.split(',')[0];
            value = data.split(',')[1];
            run(request, value);
